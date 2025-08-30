@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
+import Main from "../components/Main.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
@@ -15,11 +16,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
   <head>
     <BaseHead title={title} description={description} />
     <style>
-      main {
-        width: calc(100% - 2em);
-        max-width: 100%;
-        margin: 0;
-      }
       .hero-image {
         width: 100%;
       }
@@ -28,13 +24,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         margin: 0 auto;
         border-radius: 12px;
         box-shadow: var(--box-shadow);
-      }
-      .prose {
-        width: 720px;
-        max-width: calc(100% - 2em);
-        margin: auto;
-        padding: 1em;
-        color: rgb(var(--gray-dark));
       }
       .title {
         margin-bottom: 1em;
@@ -57,8 +46,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
   <body>
     <Header />
-    <main>
-      <article>
+    <Main>
+      <article class="prose prose-timberwolf">
         <div class="hero-image">
           {
             heroImage && (
@@ -66,7 +55,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             )
           }
         </div>
-        <div class="prose">
+        <div>
           <div class="title">
             <div class="date">
               <FormattedDate date={pubDate} />
@@ -78,13 +67,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
                 )
               }
             </div>
-            <h1>{title}</h1>
+            <h1 class="h1 text-primary">{title}</h1>
             <hr />
           </div>
           <slot />
         </div>
       </article>
-    </main>
+    </Main>
     <Footer />
   </body>
 </html>

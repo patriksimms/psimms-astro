@@ -8,6 +8,18 @@
 @theme inline {
   --font-sans: 'Satoshi', 'sans-serif';
 
+  --color-timberwolf-50: #f7f6f5;
+  --color-timberwolf-100: #eceae8;
+  --color-timberwolf-200: #d9d6d3;
+  --color-timberwolf-300: #beb9b3;
+  --color-timberwolf-400: #a39a94;
+  --color-timberwolf-500: #90857f;
+  --color-timberwolf-600: #837773;
+  --color-timberwolf-700: #6e6460;
+  --color-timberwolf-800: #5b5351;
+  --color-timberwolf-900: #4b4543;
+  --color-timberwolf-950: #272423;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -81,18 +93,6 @@
 }
 
 .dark {
-  --color-timberwolf-50: #f7f6f5;
-  --color-timberwolf-100: #eceae8;
-  --color-timberwolf-200: #d9d6d3;
-  --color-timberwolf-300: #beb9b3;
-  --color-timberwolf-400: #a39a94;
-  --color-timberwolf-500: #90857f;
-  --color-timberwolf-600: #837773;
-  --color-timberwolf-700: #6e6460;
-  --color-timberwolf-800: #5b5351;
-  --color-timberwolf-900: #4b4543;
-  --color-timberwolf-950: #272423;
-
   --background: rgb(14, 14, 17);
   --foreground: oklch(0.985 0.001 106.423);
   --card: oklch(0.216 0.006 56.043);
@@ -139,10 +139,15 @@
 .h1 {
   @apply scroll-m-20 text-center text-4xl font-extrabold tracking-normal text-balance;
 }
+
 .h2 {
   @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
 }
 
 .h3 {
   @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+}
+
+.a {
+  @apply underline text-primary hover:text-secondary;
 }
