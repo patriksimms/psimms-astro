@@ -1,0 +1,45 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  theme: {
+    extend: {
+      typography: () => ({
+        timberwolf: {
+          css: {
+            '--tw-prose-body': 'var(--color-timberwolf-200)',
+            '--tw-prose-headings': 'var(--color-timberwolf-300)',
+            '--tw-prose-lead': 'var(--color-timberwolf-700)',
+            '--tw-prose-links': 'var(--color-timberwolf-500)',
+            '--tw-prose-bold': 'var(--color-timberwolf-900)',
+            '--tw-prose-counters': 'var(--color-timberwolf-600)',
+            '--tw-prose-bullets': 'var(--color-timberwolf-400)',
+            '--tw-prose-hr': 'var(--color-timberwolf-300)',
+            '--tw-prose-quotes': 'var(--color-timberwolf-900)',
+            '--tw-prose-quote-borders': 'var(--color-timberwolf-300)',
+            '--tw-prose-captions': 'var(--color-timberwolf-700)',
+            '--tw-prose-code': 'var(--color-timberwolf-900)',
+            '--tw-prose-pre-code': 'var(--color-timberwolf-100)',
+            '--tw-prose-pre-bg': 'var(--color-timberwolf-900)',
+            '--tw-prose-th-borders': 'var(--color-timberwolf-300)',
+            '--tw-prose-td-borders': 'var(--color-timberwolf-200)',
+            '--tw-prose-invert-body': 'var(--color-timberwolf-200)',
+            '--tw-prose-invert-headings': 'var(--color-white)',
+            '--tw-prose-invert-lead': 'var(--color-timberwolf-300)',
+            '--tw-prose-invert-links': 'var(--color-white)',
+            '--tw-prose-invert-bold': 'var(--color-white)',
+            '--tw-prose-invert-counters': 'var(--color-timberwolf-400)',
+            '--tw-prose-invert-bullets': 'var(--color-timberwolf-600)',
+            '--tw-prose-invert-hr': 'var(--color-timberwolf-700)',
+            '--tw-prose-invert-quotes': 'var(--color-timberwolf-100)',
+            '--tw-prose-invert-quote-borders': 'var(--color-timberwolf-700)',
+            '--tw-prose-invert-captions': 'var(--color-timberwolf-400)',
+            '--tw-prose-invert-code': 'var(--color-white)',
+            '--tw-prose-invert-pre-code': 'var(--color-timberwolf-300)',
+            '--tw-prose-invert-pre-bg': 'rgb(0 0 0 / 50%)',
+            '--tw-prose-invert-th-borders': 'var(--color-timberwolf-600)',
+            '--tw-prose-invert-td-borders': 'var(--color-timberwolf-700)',
+          },
+        },
+      }),
+    },
+  },
+}

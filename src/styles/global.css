@@ -1,9 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+@config "../../tailwind.config.js";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: 'Satoshi', 'sans-serif';
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -77,15 +81,27 @@
 }
 
 .dark {
-  --background: oklch(0.147 0.004 49.25);
+  --color-timberwolf-50: #f7f6f5;
+  --color-timberwolf-100: #eceae8;
+  --color-timberwolf-200: #d9d6d3;
+  --color-timberwolf-300: #beb9b3;
+  --color-timberwolf-400: #a39a94;
+  --color-timberwolf-500: #90857f;
+  --color-timberwolf-600: #837773;
+  --color-timberwolf-700: #6e6460;
+  --color-timberwolf-800: #5b5351;
+  --color-timberwolf-900: #4b4543;
+  --color-timberwolf-950: #272423;
+
+  --background: rgb(14, 14, 17);
   --foreground: oklch(0.985 0.001 106.423);
   --card: oklch(0.216 0.006 56.043);
   --card-foreground: oklch(0.985 0.001 106.423);
   --popover: oklch(0.216 0.006 56.043);
   --popover-foreground: oklch(0.985 0.001 106.423);
-  --primary: oklch(0.923 0.003 48.717);
+  --primary: var(--color-timberwolf-500);
   --primary-foreground: oklch(0.216 0.006 56.043);
-  --secondary: oklch(0.268 0.007 34.298);
+  --secondary: var(--color-timberwolf-300);
   --secondary-foreground: oklch(0.985 0.001 106.423);
   --muted: oklch(0.268 0.007 34.298);
   --muted-foreground: oklch(0.709 0.01 56.259);
@@ -117,4 +133,16 @@
   body {
     @apply bg-background text-foreground;
   }
+
+}
+
+.h1 {
+  @apply scroll-m-20 text-center text-4xl font-extrabold tracking-normal text-balance;
+}
+.h2 {
+  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+}
+
+.h3 {
+  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
 }
