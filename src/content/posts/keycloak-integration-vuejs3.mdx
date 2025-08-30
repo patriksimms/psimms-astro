@@ -85,7 +85,7 @@ if (!window.localStorage.getItem('keycloakToken')) {
 ```
 If a tokes is already existing, the app is instantiated directly, if not, only after the user authenticated at keycloak.
 
-Remarks
+## Remarks
 This implementation does not provide the best user experience because the user is redirected to keycloak after the failure of an request, loosing all his data and does not know why it failed. Keep that in ming if you integrate this.
 
 But for my prototyping usecase this is more than enough and until now it works perfectly.
