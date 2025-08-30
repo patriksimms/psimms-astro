@@ -6,7 +6,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: 'Satoshi', 'sans-serif';
+  --font-sans: "Satoshi", "sans-serif";
 
   --color-timberwolf-50: #f7f6f5;
   --color-timberwolf-100: #eceae8;
@@ -94,7 +94,7 @@
 
 .dark {
   --background: rgb(14, 14, 17);
-  --foreground: oklch(0.985 0.001 106.423);
+  --foreground: var(--color-timberwolf-300);
   --card: oklch(0.216 0.006 56.043);
   --card-foreground: oklch(0.985 0.001 106.423);
   --popover: oklch(0.216 0.006 56.043);
@@ -133,7 +133,6 @@
   body {
     @apply bg-background text-foreground;
   }
-
 }
 
 .h1 {
@@ -149,5 +148,5 @@
 }
 
 .a {
-  @apply underline text-primary hover:text-secondary;
+  @apply text-primary hover:text-secondary underline;
 }
