@@ -9,7 +9,8 @@ import Header from "../components/Header.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, contentMaxWidth } =
+  Astro.props;
 ---
 
 <html lang="en" class="dark">
@@ -46,34 +47,63 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
   <body>
     <Header />
-    <Main>
-      <article class="prose prose-timberwolf">
-        <div class="hero-image">
-          {
-            heroImage && (
-              <Image width={1020} height={510} src={heroImage} alt="" />
-            )
-          }
-        </div>
-        <div>
-          <div class="title">
-            <div class="date">
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
+    {
+      contentMaxWidth && (
+        <Main>
+          <article class="prose prose-timberwolf">
+            <div class="hero-image">
+              {heroImage && (
+                <Image width={1020} height={510} src={heroImage} alt="" />
+              )}
             </div>
-            <h1 class="h1 text-primary">{title}</h1>
-            <hr />
-          </div>
-          <slot />
-        </div>
-      </article>
-    </Main>
+            <div>
+              <div class="title">
+                <div class="date">
+                  <FormattedDate date={pubDate} />
+                  {updatedDate && (
+                    <div class="last-updated-on">
+                      Last updated on <FormattedDate date={updatedDate} />
+                    </div>
+                  )}
+                </div>
+                <h1 class="h1 text-primary">{title}</h1>
+                <hr />
+              </div>
+              <slot />
+            </div>
+          </article>
+        </Main>
+      )
+    }
+    {
+      !contentMaxWidth && (
+        <main class="">
+          <article class="prose prose-timberwolf">
+            <div class="hero-image">
+              {heroImage && (
+                <Image width={1020} height={510} src={heroImage} alt="" />
+              )}
+            </div>
+            <div>
+              <div class="title">
+                <div class="date">
+                  <FormattedDate date={pubDate} />
+                  {updatedDate && (
+                    <div class="last-updated-on">
+                      Last updated on <FormattedDate date={updatedDate} />
+                    </div>
+                  )}
+                </div>
+                <h1 class="h1 text-primary">{title}</h1>
+                <hr />
+              </div>
+              <slot />
+            </div>
+          </article>
+        </main>
+      )
+    }
+    <Main />
     <Footer />
   </body>
 </html>

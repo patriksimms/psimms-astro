@@ -1,0 +1,7 @@
+---
+import { Image } from "astro:assets";
+
+const { src, alt } = Astro.props;
+---
+
+<Image src={src} alt={alt} class="w-screen max-w-screen" />;

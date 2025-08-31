@@ -3,7 +3,7 @@ import BlogPostOverview from '@/layouts/BlogPostOverview.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog', ({data}) => {
-    return data.tags.includes('engineering')
+    return data.tags.includes('games')
 })).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
