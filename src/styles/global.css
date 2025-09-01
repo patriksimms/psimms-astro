@@ -150,3 +150,7 @@
 .a {
   @apply text-primary hover:text-secondary underline;
 }
+
+.my-prose {
+  @apply prose prose-timberwolf max-w-3xl;
+}

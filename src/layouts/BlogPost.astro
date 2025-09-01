@@ -47,62 +47,34 @@ const { title, description, pubDate, updatedDate, heroImage, contentMaxWidth } =
 
   <body>
     <Header />
-    {
-      contentMaxWidth && (
-        <Main>
-          <article class="prose prose-timberwolf">
-            <div class="hero-image">
-              {heroImage && (
-                <Image width={1020} height={510} src={heroImage} alt="" />
-              )}
+    <Main>
+      <article class="my-prose">
+        <div class="hero-image">
+          {
+            heroImage && (
+              <Image width={1020} height={510} src={heroImage} alt="" />
+            )
+          }
+        </div>
+        <div>
+          <div class="title">
+            <div class="date">
+              <FormattedDate date={pubDate} />
+              {
+                updatedDate && (
+                  <div class="last-updated-on">
+                    Last updated on <FormattedDate date={updatedDate} />
+                  </div>
+                )
+              }
             </div>
-            <div>
-              <div class="title">
-                <div class="date">
-                  <FormattedDate date={pubDate} />
-                  {updatedDate && (
-                    <div class="last-updated-on">
-                      Last updated on <FormattedDate date={updatedDate} />
-                    </div>
-                  )}
-                </div>
-                <h1 class="h1 text-primary">{title}</h1>
-                <hr />
-              </div>
-              <slot />
-            </div>
-          </article>
-        </Main>
-      )
-    }
-    {
-      !contentMaxWidth && (
-        <main class="">
-          <article class="prose prose-timberwolf">
-            <div class="hero-image">
-              {heroImage && (
-                <Image width={1020} height={510} src={heroImage} alt="" />
-              )}
-            </div>
-            <div>
-              <div class="title">
-                <div class="date">
-                  <FormattedDate date={pubDate} />
-                  {updatedDate && (
-                    <div class="last-updated-on">
-                      Last updated on <FormattedDate date={updatedDate} />
-                    </div>
-                  )}
-                </div>
-                <h1 class="h1 text-primary">{title}</h1>
-                <hr />
-              </div>
-              <slot />
-            </div>
-          </article>
-        </main>
-      )
-    }
+            <h1 class="h1 text-primary">{title}</h1>
+            <hr />
+          </div>
+          <slot />
+        </div>
+      </article>
+    </Main>
     <Main />
     <Footer />
   </body>

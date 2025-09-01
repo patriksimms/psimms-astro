@@ -4,4 +4,8 @@ import { Image } from "astro:assets";
 const { src, alt } = Astro.props;
 ---
 
-<Image src={src} alt={alt} class="w-screen max-w-screen" />;
+<Image
+  src={src}
+  alt={alt}
+  class="relative left-1/2 block w-screen max-w-screen -translate-x-1/2"
+/>
