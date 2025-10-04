@@ -155,7 +155,7 @@
   @apply prose prose-timberwolf max-w-3xl;
 }
 
-.my-prose img {
+.my-prose img:not(.max-w-screen) {
   @apply w-full;
 }
 

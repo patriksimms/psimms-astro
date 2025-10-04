@@ -11,6 +11,16 @@ interface Props {
 }
 
 const { images, alts, titles, descriptions, galleryid } = Astro.props;
+
+function renderSize(itemsInRow: number) {
+  if (itemsInRow === 1) {
+    return 1000;
+  }
+  if (itemsInRow === 2) {
+    return 600
+  }
+  return 300
+}
 ---
 
 <section class="thumbnail-container gallery gap-4" id={"gallery-" + galleryid}>
@@ -25,8 +35,8 @@ const { images, alts, titles, descriptions, galleryid } = Astro.props;
           src={image}
           alt={alts[index]}
           layout="constrained"
-          width={300}
-          quality={40}
+          width={renderSize(images.length)}
+          quality={80}
           loading="eager"
           data-index={index}
           class="thumbnail"

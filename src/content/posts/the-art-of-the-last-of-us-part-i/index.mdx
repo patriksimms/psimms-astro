@@ -1,0 +1,59 @@
+---
+title: 'The Art of the Last of Us Part I'
+description: 'See some of the most impressive visuals which make The Last of Us Part I the most cinematic, immersive and emotional game till date'
+pubDate: 'Dec 04 2022'
+heroImage: './IMG_6820_o.jpg'
+tags: ['games']
+---
+import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert'
+import {ShieldAlert} from '@lucide/astro'
+import FullscreenPicture from '@/components/FullscreenPicture.astro'
+import Pandabox from '@/components/Pandabox.astro'
+import image0 from 'IMG_6758_o.jpg';
+import image1_1 from 'IMG_6971_o.jpg';
+import image1_2 from 'IMG_6972_o.jpg';
+import image1_3 from 'IMG_6979_o.jpg';
+import image2_1 from 'IMG_6802_o.jpg';
+import image2_2 from 'IMG_6914_o.jpg';
+import image2_3 from 'IMG_6921_o.jpg';
+import image3_1 from 'IMG_6929_o.jpg';
+import image3_2 from 'IMG_6932_o.jpg';
+import image4 from 'IMG_6966_o.jpg';
+import image5 from 'IMG_6755_o.jpg';
+import image6_1 from 'IMG_6729_o.jpg';
+import image6_2 from 'IMG_6800_o.jpg';
+import image6_3 from 'IMG_6805_o.jpg';
+import image7_1 from 'IMG_6875_o.jpg';
+import image7_2 from 'IMG_6900_o.jpg';
+import image7_3 from 'IMG_6923_o.jpg';
+import image8 from 'IMG_6816_o.jpg';
+import image9 from 'IMG_6940_o.jpg';
+import image10_1 from 'IMG_6879_o.jpg';
+import image10_2 from 'IMG_6963_o.jpg';
+import image11_1 from 'IMG_6948_o.jpg';
+import image11_2 from 'IMG_6899_o.jpg';
+import image12 from 'IMG_6945_o.jpg';
+export const altTexts = ['The Last of us 2 Screenshot', 'The Last of us 2 Screenshot', 'The Last of us 2 Screenshot']
+export const descriptions = ['The Last of us 2 Screenshot', 'The Last of us 2 Screenshot', 'The Last of us 2 Screenshot']
+export const titles = ['The Last of us 2 Screenshot', 'The Last of us 2 Screenshot', 'The Last of us 2 Screenshot']
+
+<FullscreenPicture src={image0} alt="Hero Image"/>
+
+# SPOILER WARNING
+If you have not played already, go play the Last of Us Part I. You wont regret it.
+
+All following images were created in the ingame Photo mode and were not further edited.
+{/* TODO error when sliding too far */}
+{/* TODO alt texts, descriptions, titles */}
+<Pandabox images={[image1_1, image1_2, image1_3]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test'/>
+<Pandabox images={[image2_1, image2_2, image2_3]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test1'/>
+<Pandabox images={[image3_1, image3_2]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test2'/>
+<Pandabox images={[image4]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test3'/>
+<Pandabox images={[image5]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test4'/>
+<Pandabox images={[image6_1, image6_2, image6_3]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test5'/>
+<Pandabox images={[image7_1, image7_2, image7_3]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test6'/>
+<Pandabox images={[image8]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test7'/>
+<Pandabox images={[image9]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test8'/>
+<Pandabox images={[image10_1, image10_2]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test9'/>
+<Pandabox images={[image11_1, image11_2]} alts={altTexts} descriptions={descriptions} titles={titles} galleryid='test10'/>
+<FullscreenPicture src={image12} alt={altTexts[0]} descriptions={descriptions} titles={titles} galleryid='test11'/>
