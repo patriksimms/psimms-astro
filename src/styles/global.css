@@ -154,3 +154,8 @@
 .my-prose {
   @apply prose prose-timberwolf max-w-3xl;
 }
+
+.my-prose img {
+  @apply w-full;
+}
+
