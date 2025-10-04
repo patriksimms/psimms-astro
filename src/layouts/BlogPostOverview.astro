@@ -31,7 +31,7 @@ const {posts} = Astro.props;
                     height={360}
                     src={posts[0].data.heroImage}
                     alt=""
-                    class="mb-2 rounded-lg"
+                    class="mb-2 rounded-lg w-full"
                   />
                 )
               }
@@ -43,7 +43,7 @@ const {posts} = Astro.props;
           </li>
           {
             posts.slice(1).map((post) => (
-              <li class="w-[calc(50%-1rem)]">
+              <li class="w-[calc(50%-1rem)] flex-grow">
                 <a href={`/posts/${post.id}/`}>
                   {post.data.heroImage && (
                     <Image
@@ -51,7 +51,7 @@ const {posts} = Astro.props;
                       height={360}
                       src={post.data.heroImage}
                       alt=""
-                      class="mb-2 rounded-lg"
+                      class="mb-2 rounded-lg w-full"
                     />
                   )}
                   <h4 class="h4">{post.data.title}</h4>
