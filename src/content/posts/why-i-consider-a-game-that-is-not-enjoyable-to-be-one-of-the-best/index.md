@@ -37,7 +37,7 @@ And then there's that one battle at the end of the game. I've never played a bat
 
 There are people who say:
 
-> “A game has to be fun, otherwise why would I play it?” 
+> A game has to be fun, otherwise why would I play it?
 
 This was one of the main criticisms of Part II. It was said to be “too dark.” While Naughty Dog can be accused of provoking precisely this expectation, I consider the argument that “games must always be fun” to be outdated. There are other things a game can trigger that are not just about fun and passing the time. This has long been common practice in film; I think very few people would claim that “Schindler's List” is an entertaining or even fun movie. I think it's time for this to be accepted for games as well. 
 

@@ -159,3 +159,7 @@
   @apply w-full;
 }
 
+.my-prose p {
+  @apply text-lg/8;
+}
+
