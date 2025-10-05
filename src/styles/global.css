@@ -159,7 +159,6 @@
   @apply w-full;
 }
 
-.my-prose p {
+.my-prose p not:[data-slot="alert"] {
   @apply text-lg/8;
 }
-
