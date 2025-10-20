@@ -18,8 +18,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage } = Astro.props;
 ---
-
-<ClientRouter />
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -71,3 +69,6 @@ const { title, description, image = FallbackImage } = Astro.props;
     /* font-display: swap; */
   }
 </style>
+<!-- Has to be at the very bottom, otherwise html titles are messed up -->
+<ClientRouter />
+
