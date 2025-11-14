@@ -4,39 +4,42 @@ import Main from "../components/Main.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import PostHogLayout from '../layouts/PostHogLayout.astro';
 ---
 
 <!doctype html>
 <html lang="en" class="dark">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Header />
-    <Main>
-      <h1 class="h1 pb-12 !text-left">
-        👋 I'm, <a
-          class="font-extrabold"
-          href="https://www.linkedin.com/in/patrik-simms/"
-          target="_blank">Patrik</a
-        >.
-      </h1>
-      <p class="h2 mb-12 !border-b-0">
-        I like product management, web development and video games
-      </p>
+  <PostHogLayout>
+    <head>
+      <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+      <Header />
+      <Main>
+        <h1 class="h1 pb-12 !text-left">
+          👋 I'm, <a
+            class="font-extrabold"
+            href="https://www.linkedin.com/in/patrik-simms/"
+            target="_blank">Patrik</a
+          >.
+        </h1>
+        <p class="h2 mb-12 !border-b-0">
+          I like product management, web development and video games
+        </p>
 
-      <article class="my-prose">
-        <p>
-          This website is where my articles, thoughts and other random stuff.
-        </p>
-        <p>
-          Currently I am working as a Product Engineer at <a
-            href=""
-            target="_blank">esome advertising technologies GmbH</a
-          >, bridging gaps between technology adtech and advertisers.
-        </p>
-      </article>
-    </Main>
-    <Footer />
-  </body>
+        <article class="my-prose">
+          <p>
+            This website is where my articles, thoughts and other random stuff.
+          </p>
+          <p>
+            Currently I am working as a Product Engineer at <a
+              href=""
+              target="_blank">esome advertising technologies GmbH</a
+            >, bridging gaps between technology adtech and advertisers.
+          </p>
+        </article>
+      </Main>
+      <Footer />
+    </body>
+  </PostHogLayout>
 </html>
