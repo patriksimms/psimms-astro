@@ -7,7 +7,6 @@ import Footer from "@/components/Footer.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import Header from "@/components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
-import PostHogLayout from "../layouts/PostHogLayout.astro";
 
 type Props = { posts: CollectionEntry<"blog">[] };
 const { posts } = Astro.props;
@@ -15,59 +14,57 @@ const { posts } = Astro.props;
 
 <!doctype html>
 <html lang="en" class="dark">
-  <PostHogLayout>
-    <head>
-      <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    </head>
-    <body>
-      <Header />
-      <Main>
-        <section>
-          <ul class="m-0 flex list-none flex-wrap gap-0.5 p-0 md:gap-6">
-            <li class="mb-6 w-full text-center">
-              <a href={`/posts/${posts[0].id}/`}>
-                {
-                  posts[0].data.heroImage && (
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <Main>
+      <section>
+        <ul class="m-0 flex list-none flex-wrap gap-0.5 p-0 md:gap-6">
+          <li class="mb-6 w-full text-center">
+            <a href={`/posts/${posts[0].id}/`}>
+              {
+                posts[0].data.heroImage && (
+                  <Image
+                    width={720}
+                    height={360}
+                    src={posts[0].data.heroImage}
+                    alt=""
+                    class="mb-2 w-full rounded-lg"
+                  />
+                )
+              }
+              <h4 class="h2 !border-b-0">{posts[0].data.title}</h4>
+              <p class="text-sm">
+                <FormattedDate date={posts[0].data.pubDate} />
+              </p>
+            </a>
+          </li>
+          {
+            posts.slice(1).map((post) => (
+              <li class="w-[calc(50%-1rem)] flex-grow">
+                <a href={`/posts/${post.id}/`}>
+                  {post.data.heroImage && (
                     <Image
                       width={720}
                       height={360}
-                      src={posts[0].data.heroImage}
+                      src={post.data.heroImage}
                       alt=""
                       class="mb-2 w-full rounded-lg"
                     />
-                  )
-                }
-                <h4 class="h2 !border-b-0">{posts[0].data.title}</h4>
-                <p class="text-sm">
-                  <FormattedDate date={posts[0].data.pubDate} />
-                </p>
-              </a>
-            </li>
-            {
-              posts.slice(1).map((post) => (
-                <li class="w-[calc(50%-1rem)] flex-grow">
-                  <a href={`/posts/${post.id}/`}>
-                    {post.data.heroImage && (
-                      <Image
-                        width={720}
-                        height={360}
-                        src={post.data.heroImage}
-                        alt=""
-                        class="mb-2 w-full rounded-lg"
-                      />
-                    )}
-                    <h4 class="h4">{post.data.title}</h4>
-                    <p class="text-sm">
-                      <FormattedDate date={post.data.pubDate} />
-                    </p>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </section>
-      </Main>
-      <Footer />
-    </body>
-  </PostHogLayout>
+                  )}
+                  <h4 class="h4">{post.data.title}</h4>
+                  <p class="text-sm">
+                    <FormattedDate date={post.data.pubDate} />
+                  </p>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </Main>
+    <Footer />
+  </body>
 </html>
