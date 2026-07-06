@@ -8,8 +8,10 @@ import FormattedDate from "@/components/FormattedDate.astro";
 import Header from "@/components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 
-type Props = { posts: CollectionEntry<"blog">[] };
-const { posts } = Astro.props;
+type Props = { posts: CollectionEntry<"blog">[]; title?: string };
+const { posts, title } = Astro.props;
+
+const [featured, ...rest] = posts;
 ---
 
 <!doctype html>
@@ -20,50 +22,82 @@ const { posts } = Astro.props;
   <body>
     <Header />
     <Main>
-      <section>
-        <ul class="m-0 flex list-none flex-wrap gap-0.5 p-0 md:gap-6">
-          <li class="mb-6 w-full text-center">
-            <a href={`/posts/${posts[0].id}/`}>
-              {
-                posts[0].data.heroImage && (
-                  <Image
-                    width={720}
-                    height={360}
-                    src={posts[0].data.heroImage}
-                    alt=""
-                    class="mb-2 w-full rounded-lg"
-                  />
-                )
-              }
-              <h4 class="h2 !border-b-0">{posts[0].data.title}</h4>
-              <p class="text-sm">
-                <FormattedDate date={posts[0].data.pubDate} />
+      {
+        title && (
+          <header class="mb-12">
+            <p class="eyebrow mb-2">Writing</p>
+            <h1 class="h1 capitalize">{title}</h1>
+          </header>
+        )
+      }
+
+      {
+        featured && (
+          <a
+            href={`/posts/${featured.id}/`}
+            class="group focus-visible:outline-ring/70 mb-14 block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4"
+          >
+            {featured.data.heroImage && (
+              <div class="border-border/60 mb-5 overflow-hidden rounded-2xl border">
+                <Image
+                  width={1200}
+                  height={600}
+                  src={featured.data.heroImage}
+                  alt=""
+                  class="aspect-[2/1] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                />
+              </div>
+            )}
+            <p class="eyebrow mb-2">
+              <FormattedDate date={featured.data.pubDate} />
+            </p>
+            <h2 class="h2 group-hover:text-secondary transition-colors">
+              {featured.data.title}
+            </h2>
+            {featured.data.description && (
+              <p class="text-muted-foreground mt-3 max-w-2xl leading-relaxed">
+                {featured.data.description}
               </p>
-            </a>
-          </li>
-          {
-            posts.slice(1).map((post) => (
-              <li class="w-[calc(50%-1rem)] flex-grow">
-                <a href={`/posts/${post.id}/`}>
-                  {post.data.heroImage && (
+            )}
+          </a>
+        )
+      }
+
+      <ul class="grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 sm:grid-cols-2">
+        {
+          rest.map((post) => (
+            <li>
+              <a
+                href={`/posts/${post.id}/`}
+                class="group focus-visible:outline-ring/70 block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4"
+              >
+                {post.data.heroImage && (
+                  <div class="border-border/60 mb-4 overflow-hidden rounded-xl border">
                     <Image
                       width={720}
-                      height={360}
+                      height={405}
                       src={post.data.heroImage}
                       alt=""
-                      class="mb-2 w-full rounded-lg"
+                      class="aspect-video w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                     />
-                  )}
-                  <h4 class="h4">{post.data.title}</h4>
-                  <p class="text-sm">
-                    <FormattedDate date={post.data.pubDate} />
+                  </div>
+                )}
+                <p class="eyebrow mb-2">
+                  <FormattedDate date={post.data.pubDate} />
+                </p>
+                <h3 class="h4 group-hover:text-secondary transition-colors">
+                  {post.data.title}
+                </h3>
+                {post.data.description && (
+                  <p class="text-muted-foreground mt-2 line-clamp-2 text-sm leading-relaxed">
+                    {post.data.description}
                   </p>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </Main>
     <Footer />
   </body>
