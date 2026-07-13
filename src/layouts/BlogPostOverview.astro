@@ -44,7 +44,7 @@ const [featured, ...rest] = posts;
                   height={600}
                   src={featured.data.heroImage}
                   alt=""
-                  class="aspect-[2/1] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  class="w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                 />
               </div>
             )}
@@ -78,7 +78,7 @@ const [featured, ...rest] = posts;
                       height={405}
                       src={post.data.heroImage}
                       alt=""
-                      class="aspect-video w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                      class="w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                     />
                   </div>
                 )}
