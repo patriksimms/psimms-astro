@@ -9,7 +9,7 @@ tags: ['engineering']
 import Alert from "@/components/ui/Alert.astro";
 import { ShieldAlert } from "@lucide/astro";
 
-> There is no 100% security, this is not a guarantee that attackers steal your AWS credentials! It is about reducing the most obvious attack vectors. 
+> There is no 100% security, this does not guarantee that attackers cannot steal your AWS credentials. It only reduces the most obvious attack vectors!
 
 <Alert variant="warning" title="Jump to solution">
   <ShieldAlert slot="icon" />
@@ -53,7 +53,7 @@ Since I use [1Password](https://1password.com/de) for my private stuff, I checke
 
 * Install CLI & aws-cli extension [https://www.1password.dev/cli/shell-plugins/aws](https://www.1password.dev/cli/shell-plugins/aws)
 * back up your `.aws/credentials` file
-* delete your `.aws/credentials` file to make op is the only source of access later on
+* delete your `.aws/credentials` file to ensure that `op` is the only credential source
 * Follow setup in [https://www.1password.dev/cli/shell-plugins/aws](https://www.1password.dev/cli/shell-plugins/aws)
 * test op CLI with AWS: `aws sts get-caller-identity --profile <prod>`. You should get prompted with a Touch ID modal for accessing AWS credentials
 
@@ -191,12 +191,12 @@ export const buildAwsClientCredentials = buildAwsCredentialProvider;
 ## aws-vault
 
 * Follow Setup guide [here](https://github.com/ByteNess/aws-vault)
-* * back up your `.aws/credentials` file
-* delete your `.aws/credentials` file to make op is the only source of access later on
+* back up your `.aws/credentials` file
+* delete your `.aws/credentials` file to ensure that `aws-vault` is the only credential source
 * test aws-vault credentials: `aws-vault exec <prod> -- aws sts get-caller-identity`
 
 ### kubectl
-When accessing k8s via AWS, you need to update your `~/.kube/config` to request credentials from op secret storage
+When accessing k8s via AWS, you need to update your `~/.kube/config` to request credentials from `aws-vault`
 
 ```yml
 apiVersion: v1
@@ -240,5 +240,5 @@ users:
 ```
 
 ### Application Credentials (Node.js)
-There seems to be a way to integrate docker with aws-vault, but it seems a rather complex setup, did not try it yet:
+There appears to be a way to integrate Docker with `aws-vault`, but the setup looks rather complex, and I haven't tried it yet:
 [https://github.com/ByteNess/aws-vault/blob/main/USAGE.md#docker](https://github.com/ByteNess/aws-vault/blob/main/USAGE.md#docker)
