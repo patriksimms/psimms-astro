@@ -1,6 +1,6 @@
 ---
 title: 'Remove AWS credentials file for secure coding agent use'
-description: 'Detailed guide how to use 1password CLI (op) for AWS credentials so malicous skills cannot extract aws credentials easily'
+description: 'Detailed guide how to use 1Password CLI (op) for AWS credentials so malicious skills cannot extract AWS credentials easily'
 pubDate: 'Jul 08 2026'
 heroImage: './aws_op.png'
 tags: ['engineering']
@@ -21,7 +21,7 @@ import { ShieldAlert } from "@lucide/astro";
   </p>
 </Alert>
 
-Couple of weeks ago we rolled out codex for every developer at [esome](https://www.esome.com/de/digital-marketing-solutions/). I have been a heavy user since begining of the year and it was only natural to do a Q&A Session with other heavy users and for those who only got introduced to the style of LLM usage.
+Couple of weeks ago we rolled out Codex for every developer at [esome](https://www.esome.com/de/digital-marketing-solutions/). I have been a heavy user since beginning of the year and it was only natural to do a Q&A session with other heavy users and for those who only got introduced to the style of LLM usage.
 
 What I did not expect: Most of the questions were about security.
 
@@ -33,13 +33,13 @@ During the meeting I mostly answered with "did not care about it, used yolo mode
 
 ## The problem
 
-By default, AWS credentials are stored in plain text in `~/.aws/credentials` file. As long as codex/ claude code is allowed to execute arbitary bash commands, a small malicous text in a skill you install could lead to a command executed that reads the content of the file and POST-ing it somewhere with curl. Couple of seconds, credentials gone.
+By default, AWS credentials are stored in plain text in `~/.aws/credentials` file. As long as Codex/Claude Code is allowed to execute arbitrary bash commands, a small malicious text in a skill you install could lead to a command executed that reads the content of the file and POST-ing it somewhere with curl. Couple of seconds, credentials gone.
 
-Depending if you were able to spot the command beeing executed, bac actors could do all kind of things depending on the permissions your AWS user has. 
+Depending if you were able to spot the command being executed, bad actors could do all kind of things depending on the permissions your AWS user has.
 
 Therefore we want to:
 * prevent the credentials stored in plain text all the time
-* prevent the credentials stored temporaily in a file over multiple shells
+* prevent the credentials stored temporarily in a file over multiple shells
 * grant permissions manually every time AWS credentials are accessed
 * should work for accessing AWS APIs like bedrock/ textract locally for development
 
@@ -47,18 +47,18 @@ Therefore we want to:
 
 There are several options for not storing AWS credentials in plain text. All of them revolve somehow about a keychain-like secure backend, depending on your OS. I started with [aws-vault](https://github.com/ByteNess/aws-vault) which uses macOS keychain, but quickly got annoyed due to buggy/ not working touch ID. And no way I am going to enter my keychain password manually every time my agent wants to access kubectl for debugging an issue. I will still attach relevant scripts for aws-vault below.
 
-Since I use [1password](https://1password.com/de) for my private stuff, I checked it out and they have a [first-party plugin](https://www.1password.dev/cli/shell-plugins/aws) for working with aws-cli. 
+Since I use [1Password](https://1password.com/de) for my private stuff, I checked it out and they have a [first-party plugin](https://www.1password.dev/cli/shell-plugins/aws) for working with AWS CLI.
 
-## op (1password CLI)
+## op (1Password CLI)
 
 * Install CLI & aws-cli extension [https://www.1password.dev/cli/shell-plugins/aws](https://www.1password.dev/cli/shell-plugins/aws)
 * back up your `.aws/credentials` file
 * delete your `.aws/credentials` file to make op is the only source of access later on
 * Follow setup in [https://www.1password.dev/cli/shell-plugins/aws](https://www.1password.dev/cli/shell-plugins/aws)
-* test op CLI with aws: `aws sts get-caller-identity --profile <prod>`. You should get promted with a touch ID modal for accessing aws credentials
+* test op CLI with AWS: `aws sts get-caller-identity --profile <prod>`. You should get prompted with a Touch ID modal for accessing AWS credentials
 
 ### kubectl
-When accessing k8s via aws, you need top update your `~/.kube/config` to request credentials from op secret storage
+When accessing k8s via AWS, you need to update your `~/.kube/config` to request credentials from op secret storage
 
 ```yaml
 apiVersion: v1
@@ -91,16 +91,16 @@ users:
       provideClusterInfo: false
 ```
 
-### Application credentials (nodejs)
-If your locally running service you are developing needs access to AWS resources, e.g. AWS Bedrock, this whole thing might break apart. Your application does not know about a shell or the created alias from 1password. 
+### Application credentials (Node.js)
+If your locally running service you are developing needs access to AWS resources, e.g. AWS Bedrock, this whole thing might break apart. Your application does not know about a shell or the created alias from 1Password.
 
-In these cases you can use 1password environments.
+In these cases you can use 1Password environments.
 ![](1password_env.png)
 
-* Create an environment in 1password with these 3 env vars
+* Create an environment in 1Password with these 3 env vars
 * Create methods for authenticating in production (via IAM roles) and locally (via environment variables)
 * Keep in mind: if you are assuming IAM roles locally, you need wrap it into `fromTemporaryCredentials` provider, using the correct role
-* Copy environment-ley from 1password interface at 3dots -> Copy environment ID
+* Copy the environment key from the 1Password interface at three dots -> Copy environment ID
 * You can start applications with `op run --environment xxx -- bun run dev`
 
 ```ts
@@ -196,7 +196,7 @@ export const buildAwsClientCredentials = buildAwsCredentialProvider;
 * test aws-vault credentials: `aws-vault exec <prod> -- aws sts get-caller-identity`
 
 ### kubectl
-When accessing k8s via aws, you need top update your `~/.kube/config` to request credentials from op secret storage
+When accessing k8s via AWS, you need to update your `~/.kube/config` to request credentials from op secret storage
 
 ```yml
 apiVersion: v1
@@ -239,6 +239,6 @@ users:
       provideClusterInfo: false
 ```
 
-### Application Credentials (nodejs)
+### Application Credentials (Node.js)
 There seems to be a way to integrate docker with aws-vault, but it seems a rather complex setup, did not try it yet:
 [https://github.com/ByteNess/aws-vault/blob/main/USAGE.md#docker](https://github.com/ByteNess/aws-vault/blob/main/USAGE.md#docker)
