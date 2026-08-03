@@ -9,7 +9,7 @@ import patrik from "../assets/patrik.webp";
 const podcasts = [
   {
     title: "A Bit of Optimism",
-    recommendation: "Compared to the bad things happening around the world, these podcast shares small and big stories which motivate be the optimism shared by Simon and the guests",
+    recommendation: "Compared to the bad things happening around the world, this podcast shares small and big stories, and the optimism shared by Simon and his guests motivates me",
     appleUrl:
       "https://podcasts.apple.com/us/podcast/a-bit-of-optimism/id1515385282",
     spotifyUrl: "https://open.spotify.com/show/0wjYlCNxLDgFUUjZMaP6Dx",
@@ -18,7 +18,7 @@ const podcasts = [
   },
   {
     title: "Die Neuen Zwanziger",
-    recommendation: "Was looking for a stable host duo which talk about society, economy, politics and pop-culture while not drifting in the classic \"just talk\" podcast. Its Exactly that",
+    recommendation: "Was looking for a stable host duo who talk about society, economy, politics and pop culture without drifting into the classic \"just talk\" podcast. It's exactly that",
     appleUrl:
       "https://podcasts.apple.com/us/podcast/die-neuen-zwanziger/id1492969533",
     spotifyUrl: "https://open.spotify.com/show/6vdt4E1fBBDMnxovNxafsM",
@@ -27,7 +27,7 @@ const podcasts = [
   },
   {
     title: "Mental Hell",
-    recommendation: "Some german guys talking about their previous & current struggles. Good for reflection that its is okay to struggle as well",
+    recommendation: "Some German guys talking about their previous & current struggles. A good reminder that it is okay to struggle as well",
     appleUrl: "https://podcasts.apple.com/de/podcast/mental-hell/id1815908991",
     spotifyUrl: "https://open.spotify.com/show/33x8uyVTKRiF9NAcIh7pHC",
     embedUrl:
@@ -35,7 +35,7 @@ const podcasts = [
   },
   {
     title: "UNFASSBAR – ein Simplicissimus Podcast",
-    recommendation: "Hosted by probably the best modern journalism-format in YT-germany. THe podcast focusses on crazy stories related to internet, crime, economy and and science",
+    recommendation: "Hosted by probably the best modern journalism format on German YouTube. The podcast focuses on crazy stories related to the internet, crime, economy and science",
     appleUrl:
       "https://podcasts.apple.com/de/podcast/unfassbar-ein-simplicissimus-podcast/id1773622508",
     spotifyUrl: "https://open.spotify.com/show/1fIKSlQOkkUvWHucC6oKrr",
@@ -71,8 +71,8 @@ const playlists = [
           <p class="eyebrow mb-3">A little introduction</p>
           <h1 class="h1 mb-5">Me</h1>
           <p class="text-secondary text-xl leading-relaxed sm:text-2xl">
-            Product engineer, Pragmatism, Product- Development, Full- Stack-
-            Engineering
+            Product engineer · pragmatism · product development · full-stack
+            engineering
           </p>
         </div>
         <Image
@@ -88,10 +88,7 @@ const playlists = [
 
       <section class="mt-20" aria-labelledby="podcasts-heading">
         <p class="eyebrow mb-3">What I'm listening to</p>
-        <h2 id="podcasts-heading" class="h2 mb-3">Podcasts</h2>
-        <p class="text-secondary mb-8 max-w-2xl text-lg leading-relaxed">
-          A few shows currently in my rotation.
-        </p>
+        <h2 id="podcasts-heading" class="h2 mb-8">Podcasts</h2>
 
         <div class="grid gap-8">
           {
@@ -100,11 +97,9 @@ const playlists = [
                 <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
                   <div>
                     <h3 class="h3">{podcast.title}</h3>
-                    {podcast.recommendation && (
-                      <p class="text-muted-foreground mt-1">
-                        {podcast.recommendation}
-                      </p>
-                    )}
+                    <p class="text-muted-foreground mt-1">
+                      {podcast.recommendation}
+                    </p>
                   </div>
                   <nav
                     class="flex flex-wrap gap-2"
@@ -144,11 +139,8 @@ const playlists = [
       </section>
 
       <section class="mt-20" aria-labelledby="playlists-heading">
-        <p class="eyebrow mb-3">What I'm listening to</p>
-        <h2 id="playlists-heading" class="h2 mb-3">Playlists</h2>
-        <p class="text-secondary mb-8 max-w-2xl text-lg leading-relaxed">
-          Music currently in my rotation.
-        </p>
+        <p class="eyebrow mb-3">What I'm playing on repeat</p>
+        <h2 id="playlists-heading" class="h2 mb-8">Playlists</h2>
 
         <div class="grid gap-8">
           {

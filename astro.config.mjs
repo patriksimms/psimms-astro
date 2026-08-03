@@ -9,6 +9,9 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.psimms.de',
+  redirects: {
+    '/posts/games': '/posts/other',
+  },
   integrations: [mdx(), sitemap()],
   markdown: {
     shikiConfig: {
