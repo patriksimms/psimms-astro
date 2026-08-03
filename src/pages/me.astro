@@ -90,17 +90,14 @@ const playlists = [
         <p class="eyebrow mb-3">What I'm listening to</p>
         <h2 id="podcasts-heading" class="h2 mb-8">Podcasts</h2>
 
-        <div class="grid gap-8">
+        <div class="divide-border divide-y">
           {
             podcasts.map((podcast) => (
-              <article>
+              <article class="py-8 first:pt-0 last:pb-0">
                 <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
-                  <div>
-                    <h3 class="h3">{podcast.title}</h3>
-                    <p class="text-muted-foreground mt-1">
-                      {podcast.recommendation}
-                    </p>
-                  </div>
+                  <p class="text-muted-foreground max-w-xl">
+                    {podcast.recommendation}
+                  </p>
                   <nav
                     class="flex flex-wrap gap-2"
                     aria-label={`Listen to ${podcast.title}`}
@@ -146,7 +143,6 @@ const playlists = [
           {
             playlists.map((playlist) => (
               <article>
-                <h3 class="h3 mb-4">{playlist.title}</h3>
                 <iframe
                   src={playlist.embedUrl}
                   title={`${playlist.title} Apple Music playlist`}
