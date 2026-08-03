@@ -1,0 +1,175 @@
+---
+import { Image } from "astro:assets";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Main from "../components/Main.astro";
+import patrik from "../assets/patrik.webp";
+
+const podcasts = [
+  {
+    title: "A Bit of Optimism",
+    recommendation: "Compared to the bad things happening around the world, these podcast shares small and big stories which motivate be the optimism shared by Simon and the guests",
+    appleUrl:
+      "https://podcasts.apple.com/us/podcast/a-bit-of-optimism/id1515385282",
+    spotifyUrl: "https://open.spotify.com/show/0wjYlCNxLDgFUUjZMaP6Dx",
+    embedUrl:
+      "https://embed.podcasts.apple.com/us/podcast/a-bit-of-optimism/id1515385282?itsct=podcast_box_player&itscg=30200&ls=1&theme=dark",
+  },
+  {
+    title: "Die Neuen Zwanziger",
+    recommendation: "Was looking for a stable host duo which talk about society, economy, politics and pop-culture while not drifting in the classic \"just talk\" podcast. Its Exactly that",
+    appleUrl:
+      "https://podcasts.apple.com/us/podcast/die-neuen-zwanziger/id1492969533",
+    spotifyUrl: "https://open.spotify.com/show/6vdt4E1fBBDMnxovNxafsM",
+    embedUrl:
+      "https://embed.podcasts.apple.com/us/podcast/die-neuen-zwanziger/id1492969533?itsct=podcast_box_player&itscg=30200&ls=1&theme=dark",
+  },
+  {
+    title: "Mental Hell",
+    recommendation: "Some german guys talking about their previous & current struggles. Good for reflection that its is okay to struggle as well",
+    appleUrl: "https://podcasts.apple.com/de/podcast/mental-hell/id1815908991",
+    spotifyUrl: "https://open.spotify.com/show/33x8uyVTKRiF9NAcIh7pHC",
+    embedUrl:
+      "https://embed.podcasts.apple.com/de/podcast/mental-hell/id1815908991?itsct=podcast_box_player&itscg=30200&ls=1&theme=dark",
+  },
+  {
+    title: "UNFASSBAR – ein Simplicissimus Podcast",
+    recommendation: "Hosted by probably the best modern journalism-format in YT-germany. THe podcast focusses on crazy stories related to internet, crime, economy and and science",
+    appleUrl:
+      "https://podcasts.apple.com/de/podcast/unfassbar-ein-simplicissimus-podcast/id1773622508",
+    spotifyUrl: "https://open.spotify.com/show/1fIKSlQOkkUvWHucC6oKrr",
+    embedUrl:
+      "https://embed.podcasts.apple.com/de/podcast/unfassbar-ein-simplicissimus-podcast/id1773622508?itsct=podcast_box_player&itscg=30200&ls=1&theme=dark",
+  },
+];
+
+const playlists = [
+  {
+    title: "Er hat sich das nicht ausgesucht",
+    embedUrl:
+      "https://embed.music.apple.com/de/playlist/er-hat-sich-das-nicht-ausgesucht/pl.u-vxy6PkXuzaXr0pl",
+  },
+];
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <BaseHead
+      title="Me · Patrik Simms"
+      description="A little more about Patrik Simms."
+    />
+  </head>
+  <body>
+    <Header />
+    <Main>
+      <header
+        class="mb-10 flex max-w-3xl flex-col gap-8 sm:flex-row sm:items-center"
+      >
+        <div class="max-w-2xl">
+          <p class="eyebrow mb-3">A little introduction</p>
+          <h1 class="h1 mb-5">Me</h1>
+          <p class="text-secondary text-xl leading-relaxed sm:text-2xl">
+            Product engineer, Pragmatism, Product- Development, Full- Stack-
+            Engineering
+          </p>
+        </div>
+        <Image
+          src={patrik}
+          alt="Portrait of Patrik Simms"
+          width={720}
+          widths={[240, 480, 720]}
+          sizes="(max-width: 640px) 100vw, 240px"
+          class="w-full rounded-2xl object-cover sm:w-60"
+          loading="eager"
+        />
+      </header>
+
+      <section class="mt-20" aria-labelledby="podcasts-heading">
+        <p class="eyebrow mb-3">What I'm listening to</p>
+        <h2 id="podcasts-heading" class="h2 mb-3">Podcasts</h2>
+        <p class="text-secondary mb-8 max-w-2xl text-lg leading-relaxed">
+          A few shows currently in my rotation.
+        </p>
+
+        <div class="grid gap-8">
+          {
+            podcasts.map((podcast) => (
+              <article>
+                <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
+                  <div>
+                    <h3 class="h3">{podcast.title}</h3>
+                    {podcast.recommendation && (
+                      <p class="text-muted-foreground mt-1">
+                        {podcast.recommendation}
+                      </p>
+                    )}
+                  </div>
+                  <nav
+                    class="flex flex-wrap gap-2"
+                    aria-label={`Listen to ${podcast.title}`}
+                  >
+                    <a
+                      href={podcast.appleUrl}
+                      target="_blank"
+                      rel="noopener"
+                      class="border-border bg-card hover:bg-accent text-card-foreground inline-flex items-center rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors"
+                    >
+                      Apple Podcasts ↗
+                    </a>
+                    <a
+                      href={podcast.spotifyUrl}
+                      target="_blank"
+                      rel="noopener"
+                      class="border-border bg-card hover:bg-accent text-card-foreground inline-flex items-center rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors"
+                    >
+                      Spotify ↗
+                    </a>
+                  </nav>
+                </div>
+                <iframe
+                  src={podcast.embedUrl}
+                  title={`${podcast.title} podcast player`}
+                  height="450"
+                  loading="lazy"
+                  sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+                  allow="autoplay *; encrypted-media *; clipboard-write"
+                  class="border-border bg-card w-full rounded-xl border"
+                />
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="mt-20" aria-labelledby="playlists-heading">
+        <p class="eyebrow mb-3">What I'm listening to</p>
+        <h2 id="playlists-heading" class="h2 mb-3">Playlists</h2>
+        <p class="text-secondary mb-8 max-w-2xl text-lg leading-relaxed">
+          Music currently in my rotation.
+        </p>
+
+        <div class="grid gap-8">
+          {
+            playlists.map((playlist) => (
+              <article>
+                <h3 class="h3 mb-4">{playlist.title}</h3>
+                <iframe
+                  src={playlist.embedUrl}
+                  title={`${playlist.title} Apple Music playlist`}
+                  height="450"
+                  loading="lazy"
+                  sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                  allow="autoplay *; encrypted-media *; clipboard-write"
+                  class="border-border bg-card w-full rounded-xl border"
+                />
+              </article>
+            ))
+          }
+        </div>
+      </section>
+    </Main>
+    <Footer />
+  </body>
+</html>

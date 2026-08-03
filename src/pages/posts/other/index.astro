@@ -1,13 +1,12 @@
 ---
-import BlogPostOverview from '@/layouts/BlogPostOverview.astro';
-import { getCollection } from 'astro:content';
+import BlogPostOverview from "@/layouts/BlogPostOverview.astro";
+import { getCollection } from "astro:content";
 
-const posts = (await getCollection('blog', ({data}) => {
-    return data.tags.includes('other')
-})).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-
+const posts = (
+  await getCollection("blog", ({ data }) => {
+    return data.tags.some((tag) => tag === "games" || tag === "other");
+  })
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BlogPostOverview posts={posts} title="other" />
