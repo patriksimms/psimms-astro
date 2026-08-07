@@ -1,0 +1,139 @@
+---
+import { Image } from "astro:assets";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
+import Header from "@/components/Header.astro";
+import Main from "@/components/Main.astro";
+import {
+  getReadings,
+  getPublishedReadings,
+  isPublishedReading,
+  READING_LIST_TITLE,
+  readingDomain,
+  youtubeVideoId,
+} from "@/lib/readings";
+
+const published = await getPublishedReadings();
+// Drafts (comment still TODO/empty) are visible in dev for previewing,
+// but never make it into the production build.
+const readings = import.meta.env.DEV ? await getReadings() : published;
+const lastUpdated = published[0]?.data.readDate;
+
+const description =
+  "A living log of articles, talks and papers on agentic engineering — each with a short note on why it is worth your time.";
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <BaseHead title={READING_LIST_TITLE} description={description} />
+  </head>
+  <body>
+    <Header />
+    <Main>
+      <header class="mb-12">
+        <p class="eyebrow mb-2">Living document</p>
+        <h1 class="h1">{READING_LIST_TITLE}</h1>
+        <p class="text-muted-foreground mt-4 max-w-2xl leading-relaxed">
+          {description} Newest first, updated whenever I read something worth passing
+          on.
+        </p>
+        {
+          published.length > 0 && lastUpdated && (
+            <p class="eyebrow mt-6">
+              {`${published.length} ${published.length === 1 ? "reading" : "readings"} · updated`}{" "}
+              <FormattedDate date={lastUpdated} />
+            </p>
+          )
+        }
+      </header>
+
+      {
+        readings.length === 0 && (
+          <p class="text-muted-foreground">
+            Nothing here yet — the first recommendations are on their way.
+          </p>
+        )
+      }
+
+      <div class="divide-border/60 divide-y">
+        {
+          readings.map((reading) => {
+            const videoId =
+              reading.data.type === "video"
+                ? youtubeVideoId(reading.data.url)
+                : undefined;
+            return (
+              <article id={reading.id} class="scroll-m-24 py-10 first:pt-0">
+                <p class="eyebrow mb-3 flex items-center gap-2">
+                  <a
+                    href={`#${reading.id}`}
+                    class="hover:text-foreground transition-colors"
+                  >
+                    <FormattedDate date={reading.data.readDate} />
+                  </a>
+                  <span aria-hidden="true">·</span>
+                  <span>{reading.data.type}</span>
+                  {!isPublishedReading(reading) && (
+                    <span class="border-destructive/50 text-destructive rounded-full border px-2 py-0.5">
+                      draft
+                    </span>
+                  )}
+                </p>
+
+                <p class="mb-5 leading-relaxed whitespace-pre-line">
+                  {reading.data.comment}
+                </p>
+
+                {videoId ? (
+                  <div class="border-border/60 overflow-hidden rounded-xl border">
+                    <iframe
+                      class="aspect-video w-full"
+                      src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+                      title={reading.data.title}
+                      loading="lazy"
+                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    />
+                  </div>
+                ) : (
+                  <a
+                    href={reading.data.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group border-border/60 bg-card hover:border-border flex flex-col overflow-hidden rounded-xl border transition-colors sm:flex-row"
+                  >
+                    <div class="min-w-0 flex-1 p-5">
+                      <p class="text-muted-foreground mb-1 text-xs">
+                        {reading.data.siteName ??
+                          readingDomain(reading.data.url)}
+                      </p>
+                      <h2 class="h4 group-hover:text-secondary transition-colors">
+                        {reading.data.title}
+                      </h2>
+                      {reading.data.description && (
+                        <p class="text-muted-foreground mt-2 line-clamp-2 text-sm leading-relaxed">
+                          {reading.data.description}
+                        </p>
+                      )}
+                    </div>
+                    {reading.data.image && (
+                      <Image
+                        width={480}
+                        src={reading.data.image}
+                        alt=""
+                        class="border-border/60 aspect-[1.91/1] w-full shrink-0 border-t object-cover sm:aspect-auto sm:w-52 sm:border-t-0 sm:border-l"
+                      />
+                    )}
+                  </a>
+                )}
+              </article>
+            );
+          })
+        }
+      </div>
+    </Main>
+    <Footer />
+  </body>
+</html>

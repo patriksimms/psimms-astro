@@ -1,0 +1,10 @@
+{
+  "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+  "title": "Best practices for Claude Code - Claude Code Docs",
+  "description": "Tips and patterns for getting the most out of Claude Code, from configuring your environment to scaling across parallel sessions.",
+  "siteName": "Claude Code Docs",
+  "image": "./_images/best-practices-for-claude-code-claude-code-docs.png",
+  "type": "article",
+  "readDate": "2026-07-22",
+  "comment": "TODO: add your comment"
+}

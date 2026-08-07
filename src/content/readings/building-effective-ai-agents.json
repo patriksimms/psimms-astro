@@ -1,0 +1,9 @@
+{
+  "url": "https://www.anthropic.com/engineering/building-effective-agents",
+  "title": "Building Effective AI Agents",
+  "description": "Discover how Anthropic approaches the development of reliable AI agents. Learn about our research on agent capabilities, safety considerations, and technical framework for building trustworthy AI.",
+  "image": "./_images/building-effective-ai-agents.png",
+  "type": "article",
+  "readDate": "2026-08-07",
+  "comment": "TODO: add your comment"
+}

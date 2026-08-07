@@ -1,17 +1,19 @@
 ---
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "@/components/BaseHead.astro";
 import Main from "@/components/Main.astro";
 import Footer from "@/components/Footer.astro";
-import FormattedDate from "@/components/FormattedDate.astro";
 import Header from "@/components/Header.astro";
+import PostList from "@/components/PostList.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 
-type Props = { posts: CollectionEntry<"blog">[]; title?: string };
-const { posts, title } = Astro.props;
-
-const [featured, ...rest] = posts;
+type Props = {
+  posts: CollectionEntry<"blog">[];
+  title?: string;
+  layout?: "grid" | "index" | "feature-index" | "archive";
+  thumbnails?: boolean;
+};
+const { posts, title, layout = "grid", thumbnails = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -31,73 +33,13 @@ const [featured, ...rest] = posts;
         )
       }
 
-      {
-        featured && (
-          <a
-            href={`/posts/${featured.id}/`}
-            class="group focus-visible:outline-ring/70 mb-14 block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4"
-          >
-            {featured.data.heroImage && (
-              <div class="border-border/60 mb-5 overflow-hidden rounded-2xl border">
-                <Image
-                  width={1200}
-                  height={600}
-                  src={featured.data.heroImage}
-                  alt=""
-                  class="w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                />
-              </div>
-            )}
-            <p class="eyebrow mb-2">
-              <FormattedDate date={featured.data.pubDate} />
-            </p>
-            <h2 class="h2 group-hover:text-secondary transition-colors">
-              {featured.data.title}
-            </h2>
-            {featured.data.description && (
-              <p class="text-muted-foreground mt-3 max-w-2xl leading-relaxed">
-                {featured.data.description}
-              </p>
-            )}
-          </a>
-        )
-      }
+      <slot name="before-posts" />
 
-      <ul class="grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 sm:grid-cols-2">
-        {
-          rest.map((post) => (
-            <li>
-              <a
-                href={`/posts/${post.id}/`}
-                class="group focus-visible:outline-ring/70 block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4"
-              >
-                {post.data.heroImage && (
-                  <div class="border-border/60 mb-4 overflow-hidden rounded-xl border">
-                    <Image
-                      width={720}
-                      height={405}
-                      src={post.data.heroImage}
-                      alt=""
-                      class="w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-                    />
-                  </div>
-                )}
-                <p class="eyebrow mb-2">
-                  <FormattedDate date={post.data.pubDate} />
-                </p>
-                <h3 class="h4 group-hover:text-secondary transition-colors">
-                  {post.data.title}
-                </h3>
-                {post.data.description && (
-                  <p class="text-muted-foreground mt-2 line-clamp-2 text-sm leading-relaxed">
-                    {post.data.description}
-                  </p>
-                )}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <PostList posts={posts} variant={layout} thumbnails={thumbnails}>
+        <slot name="pinned" slot="pinned" />
+      </PostList>
+
+      <slot name="after-posts" />
     </Main>
     <Footer />
   </body>

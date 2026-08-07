@@ -2,7 +2,6 @@
 title: 'Frontend Testing with Vue3 and jest'
 description: 'Vuejs 3 is stable since September 2020. From my experience, the ecosystem is not. This is a short introduction how to setup jest in vue3 and what you can do with it'
 pubDate: 'Mar 26 2021'
-heroImage: '../../assets/blog-placeholder-2.jpg'
 tags: ['engineering']
 ---
 

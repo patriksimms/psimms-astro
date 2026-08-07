@@ -1,13 +1,15 @@
 ---
-import BlogPostOverview from '@/layouts/BlogPostOverview.astro';
-import { getCollection } from 'astro:content';
+import BlogPostOverview from "@/layouts/BlogPostOverview.astro";
+import ReadingListTeaser from "@/components/ReadingListTeaser.astro";
+import { getCollection } from "astro:content";
 
-const posts = (await getCollection('blog', ({data}) => {
-    return data.tags.includes('engineering')
-})).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-
+const posts = (
+  await getCollection("blog", ({ data }) => {
+    return data.tags.includes("engineering");
+  })
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BlogPostOverview posts={posts} title="engineering" />
+<BlogPostOverview posts={posts} title="engineering" layout="index" thumbnails>
+  <ReadingListTeaser slot="pinned" variant="row" />
+</BlogPostOverview>

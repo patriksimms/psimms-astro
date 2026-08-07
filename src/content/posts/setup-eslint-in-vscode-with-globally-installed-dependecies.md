@@ -2,7 +2,6 @@
 title: 'Setup eslint in vscode with globally installed dependencies'
 description: 'Guide how to setup eslint in vscode with globally installed dependencies instead of locally installed dependencies in the project'
 pubDate: 'Feb 23 2023'
-heroImage: '../../assets/blog-placeholder-2.jpg'
 tags: ['engineering']
 ---
 
