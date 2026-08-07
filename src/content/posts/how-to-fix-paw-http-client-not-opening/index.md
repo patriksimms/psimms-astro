@@ -2,7 +2,6 @@
 title: 'How to fix Paw HTTP Client not opening a window on macOS'
 description: 'How to fix Paw HTTP / RapidAPI Client not opening a window on macOS'
 pubDate: 'Jan 13 2023'
-heroImage: '@/assets/blog-placeholder-3.jpg'
 tags: ['engineering']
 ---
 

@@ -1,15 +1,17 @@
 ---
 interface Props {
 	date: Date;
+	/** "short" drops the year — useful inside year-grouped lists. */
+	format?: 'full' | 'short';
 }
 
-const { date } = Astro.props;
+const { date, format = 'full' } = Astro.props;
 ---
 
 <time datetime={date.toISOString()}>
 	{
 		date.toLocaleDateString('en-us', {
-			year: 'numeric',
+			year: format === 'full' ? 'numeric' : undefined,
 			month: 'short',
 			day: 'numeric',
 		})

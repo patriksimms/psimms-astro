@@ -1,0 +1,175 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+
+type Props = {
+  posts: CollectionEntry<"blog">[];
+  /**
+   * grid          — hero-image feature + two-column card grid
+   * index         — typographic list, no images
+   * feature-index — hero-image feature, then a typographic list
+   * archive       — typographic list grouped by year
+   */
+  variant?: "grid" | "index" | "feature-index" | "archive";
+  /** Show a hero-image thumbnail per row (index variants only). */
+  thumbnails?: boolean;
+};
+
+const { posts, variant = "grid", thumbnails = false } = Astro.props;
+
+// The index list has no top rule on purpose — whatever sits above it (the page
+// header, or the reading-list rail) already draws one. Rows without a hero
+// image let their text run the full width rather than leaving a dead gutter.
+
+const [featured, ...rest] = posts;
+const listed = variant === "feature-index" ? rest : posts;
+
+// Year -> posts, preserving the newest-first order the caller passed in.
+const byYear = new Map<number, CollectionEntry<"blog">[]>();
+for (const post of posts) {
+  const year = post.data.pubDate.getFullYear();
+  byYear.set(year, [...(byYear.get(year) ?? []), post]);
+}
+---
+
+{
+  (variant === "grid" || variant === "feature-index") && featured && (
+    <a
+      href={`/posts/${featured.id}/`}
+      class="group focus-visible:outline-ring/70 mb-14 block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4"
+    >
+      {featured.data.heroImage && (
+        <div class="border-border/60 mb-5 overflow-hidden rounded-2xl border">
+          <Image
+            width={1200}
+            height={600}
+            src={featured.data.heroImage}
+            alt=""
+            class="w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+          />
+        </div>
+      )}
+      <p class="eyebrow mb-2">
+        <FormattedDate date={featured.data.pubDate} />
+      </p>
+      <h2 class="h2 group-hover:text-secondary transition-colors">
+        {featured.data.title}
+      </h2>
+      {featured.data.description && (
+        <p class="text-muted-foreground mt-3 max-w-2xl leading-relaxed">
+          {featured.data.description}
+        </p>
+      )}
+    </a>
+  )
+}
+
+{
+  variant === "grid" && (
+    <ul class="grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 sm:grid-cols-2">
+      {rest.map((post) => (
+        <li>
+          <a
+            href={`/posts/${post.id}/`}
+            class="group focus-visible:outline-ring/70 block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4"
+          >
+            {post.data.heroImage && (
+              <div class="border-border/60 mb-4 overflow-hidden rounded-xl border">
+                <Image
+                  width={720}
+                  height={405}
+                  src={post.data.heroImage}
+                  alt=""
+                  class="w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                />
+              </div>
+            )}
+            <p class="eyebrow mb-2">
+              <FormattedDate date={post.data.pubDate} />
+            </p>
+            <h3 class="h4 group-hover:text-secondary transition-colors">
+              {post.data.title}
+            </h3>
+            {post.data.description && (
+              <p class="text-muted-foreground mt-2 line-clamp-2 text-sm leading-relaxed">
+                {post.data.description}
+              </p>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+{
+  (variant === "index" || variant === "feature-index") && (
+    <ul class="divide-border/60 border-border/60 list-none divide-y border-b p-0">
+      <slot name="pinned" />
+      {listed.map((post) => (
+        <li>
+          <a
+            href={`/posts/${post.id}/`}
+            class="group flex flex-col gap-1 py-6 sm:flex-row sm:gap-8"
+          >
+            <span class="eyebrow shrink-0 pt-1 sm:w-28">
+              <FormattedDate date={post.data.pubDate} />
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="h4 group-hover:text-secondary block transition-colors">
+                {post.data.title}
+              </span>
+              {post.data.description && (
+                <span class="text-muted-foreground mt-1.5 block text-sm leading-relaxed">
+                  {post.data.description}
+                </span>
+              )}
+            </span>
+            {thumbnails && post.data.heroImage && (
+              <span class="border-border/60 hidden w-32 shrink-0 overflow-hidden rounded-md border sm:block">
+                <Image
+                  width={256}
+                  height={144}
+                  src={post.data.heroImage}
+                  alt=""
+                  class="aspect-video w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+                />
+              </span>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+{
+  variant === "archive" &&
+    [...byYear].map(([year, yearPosts]) => (
+      <section class="border-border/60 border-t py-8 first:border-t-0 first:pt-0 sm:flex sm:gap-10">
+        <h2 class="eyebrow mb-5 shrink-0 self-start sm:sticky sm:top-8 sm:mb-0 sm:w-28">
+          {year}
+        </h2>
+        <ul class="min-w-0 flex-1 list-none space-y-7 p-0">
+          {yearPosts.map((post) => (
+            <li>
+              <a href={`/posts/${post.id}/`} class="group block">
+                <span class="h4 group-hover:text-secondary block transition-colors">
+                  {post.data.title}
+                </span>
+                {post.data.description && (
+                  <span class="text-muted-foreground mt-1.5 block text-sm leading-relaxed">
+                    {post.data.description}
+                  </span>
+                )}
+                <span class="eyebrow mt-2 block">
+                  <FormattedDate date={post.data.pubDate} format="short" />
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+}

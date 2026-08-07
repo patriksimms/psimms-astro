@@ -1,0 +1,10 @@
+{
+  "url": "https://x.com/posthog/status/2083231950744244360?s=46",
+  "title": "PostHog (@posthog) on X",
+  "description": "10,000 PRs a month is easy: How devex is evolving at PostHog",
+  "siteName": "X (formerly Twitter)",
+  "image": "./_images/posthog-posthog-on-x.jpg",
+  "type": "article",
+  "readDate": "2026-08-07",
+  "comment": "Perspectives about adding verification capabilities to coding agents for FE changes and how to reduce bottlenecks on long CI jobs. The latter one applies to bigger organizations/ tech-stacks than I work in 😕"
+}
