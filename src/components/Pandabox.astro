@@ -458,8 +458,6 @@ function renderSize(itemsInRow: number) {
     const closeButton =
       document.querySelector<HTMLButtonElement>(".close-button");
 
-    const debug = false; // Enable debug logging
-
     // Set closeDuration from CSS custom property
     const closeDuration =
       parseFloat(
@@ -538,7 +536,6 @@ function renderSize(itemsInRow: number) {
         const image =
           newActiveImage.querySelector<HTMLImageElement>(".lightbox-image");
         if (image) {
-          logDebugInfo("Image Loaded", undefined, image);
           calculateCentering(image);
         }
 
@@ -603,8 +600,6 @@ function renderSize(itemsInRow: number) {
               `${initialScale}`,
             );
 
-            logDebugInfo("Thumbnail Clicked", rect);
-
             if (lightboxDialog.getAttribute("data-option") !== "slide") {
               calculateCentering(lightboxImage);
             }
@@ -666,17 +661,10 @@ function renderSize(itemsInRow: number) {
     function closeDialog() {
       if (lightboxDialog) {
         lightboxDialog.classList.add("closing"); // Add class for transition
-        // Get the current timestamp when closing starts
-        const startTime = Date.now();
-
         // Delay the actual closing of the dialog
         setTimeout(() => {
           lightboxDialog.close(); // Close the dialog after transition
           lightboxDialog.classList.remove("closing"); // Clean up class
-
-          // Calculate and log the duration
-          const endTime = Date.now();
-          const duration = endTime - startTime;
         }, closeDuration);
       }
     }
