@@ -7,18 +7,16 @@ tags: ['engineering']
 ---
 
 import Alert from "@/components/ui/Alert.astro";
-import { ShieldAlert } from "@lucide/astro";
+import ShieldAlert from "@lucide/astro/icons/shield-alert";
 
 > There is no 100% security, this does not guarantee that attackers cannot steal your AWS credentials. It only reduces the most obvious attack vectors!
 
 <Alert variant="warning" title="Jump to solution">
   <ShieldAlert slot="icon" />
-  <p>
-    If you already know the problem, jump directly to the{" "}
-    <a class="a" href="#op-1password-cli">1Password CLI solution</a>
-    {" "}or the{" "}
-    <a class="a" href="#aws-vault">aws-vault solution</a>.
-  </p>
+  If you already know the problem, jump directly to the{" "}
+  <a class="a" href="#op-1password-cli">1Password CLI solution</a>
+  {" "}or the{" "}
+  <a class="a" href="#aws-vault">aws-vault solution</a>.
 </Alert>
 
 Couple of weeks ago we rolled out Codex for every developer at [esome](https://www.esome.com/de/digital-marketing-solutions/). I have been a heavy user since beginning of the year and it was only natural to do a Q&A session with other heavy users and for those who only got introduced to the style of LLM usage.
