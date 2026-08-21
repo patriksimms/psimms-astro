@@ -1,0 +1,8 @@
+{
+  "url": "https://www.cerebras.ai/blog/how-we-built-our-knowledge-base",
+  "title": "How Cerebras Built Its Enterprise Knowledge Base",
+  "description": "See how Cerebras built an enterprise AI knowledge base that connects Slack, code repositories, documentation, and custom data sources.",
+  "type": "article",
+  "readDate": "2026-08-21",
+  "comment": "Incredible deep and technical explanation of building a knowledge base without forcing the org to use \"only this new tool\". Especially the slack part shares what challenges there are to convert slack conversations in a meaningful searching-ground for context"
+}
