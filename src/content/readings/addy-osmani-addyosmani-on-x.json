@@ -1,0 +1,10 @@
+{
+  "url": "https://x.com/addyosmani/status/2087427868343373919",
+  "title": "Addy Osmani (@addyosmani) on X",
+  "description": "Agentic Code Quality",
+  "siteName": "X (formerly Twitter)",
+  "image": "./_images/addy-osmani-addyosmani-on-x.jpg",
+  "type": "article",
+  "readDate": "2026-08-21",
+  "comment": "While more constraints usually means better results (correctness, code quality), the article argues about adjusting the constaints to your actual throughput. E.g. if Back-pressure is too high by agents creating too many human-review-needed tasks, create more constraints to reduce that effort. If too less back pressure, reduce the required quality gates of the agentic setup"
+}
