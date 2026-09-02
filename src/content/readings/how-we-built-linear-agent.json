@@ -1,0 +1,9 @@
+{
+  "url": "https://linear.app/blog/how-we-built-linear-agent",
+  "title": "How we built Linear Agent",
+  "description": "The product and engineering decisions we made so Linear Agent can handle complex tasks without becoming unpredictable.",
+  "image": "./_images/how-we-built-linear-agent.jpg",
+  "type": "article",
+  "readDate": "2026-09-02",
+  "comment": "Interesting approach for designing a harness with loading tools on demand based on skills, instead of preloading all tools upfront. Very good read!"
+}
