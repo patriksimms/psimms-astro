@@ -1,0 +1,8 @@
+{
+  "url": "https://seldo.com/posts/nobody-pays-for-open-source-we-can-force-them-to/",
+  "title": "Nobody pays for open source. We can force them to. | Seldo.com",
+  "description": "Thirty years of voluntary funding schemes haven't paid open source maintainers because asking doesn't scale. The real money already flows — to JFrog, Docker, Sonatype — at the registry layer. The fix: registries charge companies for supply (they already do), then route a slice automatically to the maintainers who make that supply worth having.",
+  "type": "article",
+  "readDate": "2026-09-16",
+  "comment": "Using the package registries as common ground between OS maintainer and OS user to require payment and transfer them to the OS maintainer. Could work"
+}
