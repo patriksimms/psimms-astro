@@ -1,0 +1,9 @@
+{
+  "url": "https://planetscale.com/blog/the-lifecycle-of-a-sharded-postgres-query",
+  "title": "The lifecycle of a sharded Postgres query — PlanetScale",
+  "description": "Follow a SQL query through the router, across four Postgres shards, and back.",
+  "image": "./_images/the-lifecycle-of-a-sharded-postgres-query-planetscale.png",
+  "type": "article",
+  "readDate": "2026-09-17",
+  "comment": "Impressivly good written post about Postgres, Query Planning and database sharding"
+}
