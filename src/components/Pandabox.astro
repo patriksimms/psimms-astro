@@ -553,8 +553,8 @@ function renderSize(itemsInRow: number) {
       async function loadImage(index: number) {
         const container = lightboxImageContainers[index];
         const template = container?.querySelector("template");
-        if (template) {
-          template.replaceWith(template.content.cloneNode(true));
+        if (template && !container?.querySelector(".lightbox-image")) {
+          template.after(template.content.cloneNode(true));
         }
         const image =
           container?.querySelector<HTMLImageElement>(".lightbox-image");
@@ -564,6 +564,8 @@ function renderSize(itemsInRow: number) {
           await image.decode();
           return true;
         } catch {
+          // Keep the template so revisiting a failed image starts a fresh request.
+          image.remove();
           return false;
         }
       }
