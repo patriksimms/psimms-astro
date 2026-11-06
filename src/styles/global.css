@@ -3,6 +3,12 @@
 @plugin "@tailwindcss/typography";
 @config "../../tailwind.config.js";
 
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/Satoshi-Variable.woff2") format("woff2");
+  font-display: swap;
+}
+
 @theme inline {
   --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
 
