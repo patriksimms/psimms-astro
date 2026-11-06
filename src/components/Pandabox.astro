@@ -559,15 +559,37 @@ function renderSize(itemsInRow: number) {
         const image =
           container?.querySelector<HTMLImageElement>(".lightbox-image");
         if (!image) return false;
-        try {
-          // Decode before revealing the image to avoid a blank opening animation.
-          await image.decode();
-          return true;
-        } catch {
-          // Keep the template so revisiting a failed image starts a fresh request.
-          image.remove();
-          return false;
+        while (image.isConnected && !signal.aborted) {
+          const source = image.currentSrc;
+          try {
+            // Decode before revealing the image to avoid a blank opening animation.
+            await image.decode();
+            return true;
+          } catch {
+            if (image.complete && image.currentSrc === source) {
+              if (image.naturalWidth > 0) return true;
+              // Keep the template so revisiting a failed image starts a fresh request.
+              image.remove();
+              return false;
+            }
+            // Responsive selection can cancel a decode while its replacement loads.
+            if (!image.complete) {
+              await new Promise<void>((resolve) => {
+                const finish = () => {
+                  image.removeEventListener("load", finish);
+                  image.removeEventListener("error", finish);
+                  signal.removeEventListener("abort", finish);
+                  resolve();
+                };
+                image.addEventListener("load", finish, { once: true });
+                image.addEventListener("error", finish, { once: true });
+                signal.addEventListener("abort", finish, { once: true });
+                if (image.complete || signal.aborted) finish();
+              });
+            }
+          }
         }
+        return false;
       }
 
       async function showImageAtIndex(index: number) {
