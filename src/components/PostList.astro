@@ -43,6 +43,10 @@ for (const post of posts) {
         <div class="border-border/60 mb-5 overflow-hidden rounded-2xl border">
           <Image
             width={1200}
+            widths={[400, 800, 1200, 1600]}
+            sizes="(min-width: 768px) 736px, calc(100vw - 32px)"
+            loading="eager"
+            fetchpriority="high"
             src={featured.data.heroImage}
             alt=""
             class="w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]"
