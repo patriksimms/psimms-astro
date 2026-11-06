@@ -79,6 +79,7 @@ function renderSize(itemsInRow: number) {
         ))
       }
     </div>
+    <p class="lightbox-status" role="status" hidden></p>
     <!-- Navigation buttons -->
     <button class="prev-button" aria-label="previous slide">
       <svg
@@ -402,6 +403,16 @@ function renderSize(itemsInRow: number) {
     }
   }
 
+  .lightbox-status {
+    grid-area: content;
+    align-self: center;
+    justify-self: center;
+    z-index: 1;
+    padding: 0.75rem 1rem;
+    background: oklch(16% 0 0 / 90%);
+    color: oklch(95% 0 0);
+  }
+
   /* Navigation Buttons */
   .lightbox-dialog {
     button {
@@ -469,7 +480,10 @@ function renderSize(itemsInRow: number) {
       const closeButton =
         gallery.querySelector<HTMLButtonElement>(".close-button");
 
-      if (!lightboxDialog) return;
+      const statusElement =
+        gallery.querySelector<HTMLElement>(".lightbox-status");
+      if (!lightboxDialog || !statusElement) return;
+      const status = statusElement;
 
       const lightboxImageContainers = gallery.querySelectorAll<HTMLElement>(
         ".lightbox-image-container",
@@ -544,17 +558,34 @@ function renderSize(itemsInRow: number) {
         }
         const image =
           container?.querySelector<HTMLImageElement>(".lightbox-image");
-        // Decode before revealing the image to avoid a blank opening animation.
-        await image?.decode().catch(() => {});
+        if (!image) return false;
+        try {
+          // Decode before revealing the image to avoid a blank opening animation.
+          await image.decode();
+          return true;
+        } catch {
+          return false;
+        }
       }
 
       async function showImageAtIndex(index: number) {
         if (index < 0 || index >= lightboxImageContainers.length) return;
 
         currentIndex = index;
-        await loadImage(index);
+        status.textContent = "Loading image…";
+        status.hidden = false;
+        const loaded = await loadImage(index);
         if (currentIndex !== index || !lightboxDialog?.open) return;
 
+        status.hidden = loaded;
+        if (!loaded) {
+          status.textContent = "Image unavailable. Try another image.";
+          return;
+        }
+        activateImage(index);
+      }
+
+      function activateImage(index: number) {
         for (const container of lightboxImageContainers) {
           container.classList.remove("active", "previous", "next");
         }
@@ -595,17 +626,37 @@ function renderSize(itemsInRow: number) {
 
         const request = ++openRequest;
         currentIndex = index;
-        await loadImage(index);
-        if (request !== openRequest || signal.aborted || !button.isConnected)
+        status.textContent = "Loading image…";
+        status.hidden = false;
+        lightboxDialog.showModal();
+        const loaded = await loadImage(index);
+        if (
+          request !== openRequest ||
+          currentIndex !== index ||
+          signal.aborted ||
+          !button.isConnected ||
+          !lightboxDialog.open
+        )
           return;
+
+        status.hidden = loaded;
+        if (!loaded) {
+          status.textContent = "Image unavailable. Try another image.";
+          return;
+        }
 
         const activeImage = lightboxImageContainers[index];
         if (activeImage) {
           activeImage.classList.add("active");
-          lightboxDialog.showModal();
           currentIndex = index;
 
           requestAnimationFrame(() => {
+            if (
+              request !== openRequest ||
+              currentIndex !== index ||
+              !lightboxDialog.open
+            )
+              return;
             const lightboxWrapper = activeImage.querySelector<HTMLDivElement>(
               ".lightbox-image-wrapper",
             );
@@ -643,7 +694,7 @@ function renderSize(itemsInRow: number) {
                 calculateCentering(lightboxImage);
               }
 
-              showImageAtIndex(currentIndex);
+              activateImage(currentIndex);
             }
           });
         }
@@ -738,6 +789,7 @@ function renderSize(itemsInRow: number) {
       lightboxDialog?.addEventListener("close", () => {
         // Invalidate an image decode that was still pending when the dialog closed.
         currentIndex = -1;
+        status.hidden = true;
         // Clean up active classes
         for (const container of lightboxImageContainers) {
           container.classList.remove("active", "previous", "next");
