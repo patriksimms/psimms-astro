@@ -8,6 +8,7 @@ import { SITE_TITLE } from "../consts";
 
 import { ClientRouter } from "astro:transitions";
 import Posthog from "./posthog.astro";
+import satoshiFont from "../assets/Satoshi-Variable.woff2?url";
 
 interface Props {
   title: string;
@@ -19,6 +20,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage } = Astro.props;
 ---
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -35,7 +37,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 <!-- Font preloads -->
 <link
   rel="preload"
-  href="/fonts/Satoshi-Variable.woff2"
+  href={satoshiFont}
   as="font"
   type="font/woff2"
   crossorigin
@@ -64,13 +66,5 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
 
 <Posthog />
-<style is:global>
-  @font-face {
-    font-family: 'Satoshi';
-    src: url("/fonts/Satoshi-Variable.woff2") format("woff2");
-    /* font-display: swap; */
-  }
-</style>
 <!-- Has to be at the very bottom, otherwise html titles are messed up -->
 <ClientRouter />
-

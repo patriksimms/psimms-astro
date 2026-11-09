@@ -49,6 +49,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             <div class="not-prose border-border/60 mb-12 overflow-hidden rounded-2xl border">
               <Image
                 width={1200}
+                widths={[400, 800, 1200, 1600]}
+                sizes="(min-width: 768px) 736px, calc(100vw - 32px)"
+                loading="eager"
+                fetchpriority="high"
                 src={heroImage}
                 alt=""
                 class="w-full object-contain"
