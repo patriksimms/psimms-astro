@@ -5,13 +5,13 @@
 Always import each Lucide icon directly from its per-icon module:
 
 ```ts
-import ShieldAlert from "@lucide/astro/icons/shield-alert";
+import BookOpen from "@lucide/astro/icons/book-open";
 ```
 
 Do not use named imports from the package root:
 
 ```ts
-import { ShieldAlert } from "@lucide/astro";
+import { BookOpen } from "@lucide/astro";
 ```
 
 Package-root imports make Vite process the complete Lucide icon export graph
